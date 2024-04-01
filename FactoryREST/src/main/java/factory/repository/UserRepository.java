@@ -3,6 +3,7 @@ package factory.repository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import factory.model.User;
+import factory.model.UserInfo;
 import factory.properties.UserProperties;
 
 import java.io.*;
@@ -56,4 +57,27 @@ public class UserRepository {
         return new ArrayList<>(Arrays.asList(users));
     }
 
+    public List<UserInfo> getAllUsersInfo() {
+
+        UserInfo[] users = null;
+        try (BufferedReader in = new BufferedReader(new FileReader(prop.getUsersPath()))) {
+            StringBuilder jsonContent = new StringBuilder();
+            String line;
+            while ((line = in.readLine()) != null) {
+                jsonContent.append(line);
+            }
+
+            users = gson.fromJson(jsonContent.toString(), UserInfo[].class);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        if (users == null) {
+            return new ArrayList<>();
+        }
+
+        return new ArrayList<>(Arrays.asList(users));
+    }
 }
