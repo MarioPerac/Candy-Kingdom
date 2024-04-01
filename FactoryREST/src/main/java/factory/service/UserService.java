@@ -27,4 +27,8 @@ public class UserService {
     public boolean deleteUser(String username) {
         return userRepository.delete(username);
     }
+
+    public boolean userAuthentication(String username, String password) {
+        return userRepository.authentication(username, password);
+    }
 }

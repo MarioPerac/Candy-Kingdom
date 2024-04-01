@@ -111,4 +111,17 @@ public class UserRepository {
 
         return false;
     }
+
+    public boolean authentication(String username, String password) {
+
+        List<User> users = getAll();
+
+        for (User u : users) {
+            if (u.getUsername().equals(username)) {
+                return u.getPassword().equals(password);
+            }
+        }
+
+        return false;
+    }
 }

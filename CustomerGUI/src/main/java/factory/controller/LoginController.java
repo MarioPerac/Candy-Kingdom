@@ -1,6 +1,8 @@
 package factory.controller;
 
 import factory.LoginApplication;
+import factory.model.UserRequest;
+import factory.service.UserService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -19,13 +21,27 @@ public class LoginController {
     public PasswordField passwordField;
     public Label infoLogInLabel;
 
+    UserService userService = new UserService();
 
     public void onSignInButtonClick(MouseEvent actionEvent) {
         Controller.changeScene("signIn-view.fxml", actionEvent);
 
     }
 
-    //to do
+
     public void onLoginButtonClicked(MouseEvent mouseEvent) {
+
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+
+        if (username.isEmpty() || password.isEmpty()) {
+            infoLogInLabel.setText("Please enter all fields.");
+        } else {
+            if (userService.login(new UserRequest(username, password))) {
+                Controller.changeScene("main-view.fxml", mouseEvent);
+            } else {
+                infoLogInLabel.setText("Try again. Incorrect credentials.");
+            }
+        }
     }
 }
