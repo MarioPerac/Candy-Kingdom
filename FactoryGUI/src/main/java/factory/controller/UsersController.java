@@ -1,6 +1,7 @@
 package factory.controller;
 
 import factory.model.Status;
+import factory.model.StatusRequest;
 import factory.model.User;
 import factory.service.UserService;
 import javafx.collections.FXCollections;
@@ -75,11 +76,14 @@ public class UsersController implements Initializable {
 
                             if (user.getStatus().equals(Status.PENDING.toString()) ) {
                                 user.setStatus(Status.ACCEPTED.toString());
-                                System.out.println("Korisnik prihvacen");
+                                boolean result = userService.changeUserStatus(user.getUsername(), new StatusRequest(user.getStatus()));
+                                System.out.println(result);
                                 usersTableView.refresh();
                             }
                             else if(user.getStatus().equals(Status.ACCEPTED.toString())){
-                                System.out.println("Korisnik obiran");
+                                if(userService.deleteUser(user.getUsername())){
+                                    usersTableView.getItems().remove(user);
+                                }
 
                                 usersTableView.refresh();
                             }
@@ -124,16 +128,15 @@ public class UsersController implements Initializable {
                             User user = getTableView().getItems().get(getTableRow().getIndex());
                             // Handle reject action based on user status
                             if (user.getStatus().equals(Status.PENDING.toString())) {
-                                // Perform reject action
-                                System.out.println(user.getUsername());
-                                user.setStatus(Status.REJECTED.toString());
 
+                                user.setStatus(Status.REJECTED.toString());
+                                userService.changeUserStatus(user.getUsername(), new StatusRequest(user.getStatus()));
                                 usersTableView.refresh();
                             }
                             else if(user.getStatus().equals(Status.ACCEPTED.toString()))
                             {
                                 user.setStatus(Status.BLOCKED.toString());
-
+                                userService.changeUserStatus(user.getUsername(), new StatusRequest(user.getStatus()));
                                 usersTableView.refresh();
                             }
                         });

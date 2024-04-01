@@ -1,14 +1,13 @@
 package factory.service;
 
 import com.google.gson.Gson;
+import factory.model.StatusRequest;
 import factory.model.User;
 import factory.properties.UserProperties;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -18,8 +17,8 @@ import java.util.List;
 
 public class UserService {
 
-    private UserProperties prop = new UserProperties();
-    private Gson gson = new Gson();
+    private final UserProperties prop = new UserProperties();
+    private final Gson gson = new Gson();
     public List<User> getAll(){
 
         HttpURLConnection connection = null;
@@ -46,5 +45,48 @@ public class UserService {
             if (connection != null)
                 connection.disconnect();
         }
+    }
+
+    public boolean deleteUser(String username){
+        HttpURLConnection connection = null;
+        try {
+            URL url = new URL(prop.getUsersURL() + "/" + username);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("DELETE");
+            connection.setRequestProperty("Content-Type", "application/json");
+
+            int responseCode = connection.getResponseCode();
+
+            return responseCode == HttpURLConnection.HTTP_NO_CONTENT;
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to delete user.", e);
+        } finally {
+            if (connection != null) {
+                connection.disconnect();
+            }
+        }
+    }
+
+    public boolean changeUserStatus(String username, StatusRequest req){
+    HttpURLConnection connection = null;
+
+        try {
+            URL url = new URL(prop.getUsersURL() + "/" + username);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("PUT");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setDoOutput(true);
+
+            PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(connection.getOutputStream())));
+            out.write(gson.toJson(req));
+            out.close();
+            int responseCode = connection.getResponseCode();
+
+            return responseCode == HttpURLConnection.HTTP_OK;
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
