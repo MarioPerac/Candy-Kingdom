@@ -21,12 +21,14 @@ public class UserRepository {
     public boolean add(User user) {
         List<User> users = getAll();
         users.add(user);
+        return writeUsers(users);
+    }
 
+    private boolean writeUsers(List<User> users) {
         try (FileWriter out = new FileWriter(prop.getUsersPath())) {
             out.write(gson.toJson(users));
         } catch (IOException e) {
 
-            System.err.println("User not added!");
             return false;
         }
 
@@ -79,5 +81,16 @@ public class UserRepository {
         }
 
         return new ArrayList<>(Arrays.asList(users));
+    }
+
+    public boolean changeStatus(String username, String status) {
+        List<User> users = getAll();
+
+        for (User u : users) {
+            if (u.getUsername().equals(username))
+                u.setStatus(status);
+        }
+
+        return writeUsers(users);
     }
 }

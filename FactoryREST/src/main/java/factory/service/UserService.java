@@ -19,4 +19,8 @@ public class UserService {
     public List<UserInfo> getUsers() {
         return userRepository.getAllUsersInfo();
     }
+
+    public boolean changeUserStatus(String username, String status) {
+        return userRepository.changeStatus(username, status);
+    }
 }

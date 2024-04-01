@@ -1,6 +1,7 @@
 package factory.controller;
 
 
+import factory.model.StatusRequest;
 import factory.model.User;
 import factory.model.UserInfo;
 import factory.service.UserService;
@@ -25,7 +26,22 @@ public class UserController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response registerUser(User user) {
-        userService.registerUser(user);
-        return Response.status(200).build();
+        if (userService.registerUser(user)) {
+            return Response.status(200).build();
+        } else {
+            return Response.status(400).build();
+        }
+    }
+
+    @PUT
+    @Path("/{username}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response changeState(@PathParam("username") String username, StatusRequest req) {
+
+        if (userService.changeUserStatus(username, req.getStatus())) {
+            return Response.status(200).build();
+        } else {
+            return Response.status(400).build();
+        }
     }
 }
