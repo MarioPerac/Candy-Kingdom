@@ -7,10 +7,7 @@ import factory.model.UserInfo;
 import factory.properties.UserProperties;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 public class UserRepository {
 
@@ -92,5 +89,26 @@ public class UserRepository {
         }
 
         return writeUsers(users);
+    }
+
+    public boolean delete(String username) {
+        List<User> users = getAll();
+
+        int index = -1;
+        for (int i = 0; i < users.size(); i++) {
+            User u = users.get(i);
+            if (u.getUsername().equals(username)) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index != -1) {
+
+            users.remove(index);
+            return writeUsers(users);
+        }
+
+        return false;
     }
 }

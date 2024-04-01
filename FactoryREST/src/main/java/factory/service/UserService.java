@@ -23,4 +23,8 @@ public class UserService {
     public boolean changeUserStatus(String username, String status) {
         return userRepository.changeStatus(username, status);
     }
+
+    public boolean deleteUser(String username) {
+        return userRepository.delete(username);
+    }
 }

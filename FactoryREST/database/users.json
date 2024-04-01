@@ -1,1 +1,1 @@
-[{"username":"exampleUser","password":"examplePassword","email":"user@example.com","phone":"+1234567890","company":"Example Company","status":"PENDING"},{"username":"mario","password":"mario","email":"peracmario@outlook.com","phone":"065000111","company":"ETF","status":"PENDING"}]
+[{"username":"mario","password":"mario","email":"peracmario@outlook.com","phone":"065000111","company":"ETF","status":"PENDING"},{"username":"exampleUser","password":"examplePassword","email":"user@example.com","phone":"+1234567890","company":"Example Company","status":"PENDING"}]

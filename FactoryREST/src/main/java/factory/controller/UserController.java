@@ -44,4 +44,14 @@ public class UserController {
             return Response.status(400).build();
         }
     }
+
+    @DELETE
+    @Path("/{username}")
+    public Response deleteUser(@PathParam("username") String username) {
+        if (userService.deleteUser(username)) {
+            return Response.status(204).build();
+        } else {
+            return Response.status(404).build();
+        }
+    }
 }
