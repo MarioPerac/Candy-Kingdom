@@ -18,7 +18,6 @@ public class ProductsController implements Initializable {
     public TableColumn<Product, String> nameColumn;
     public TableColumn<Product, Double> priceColumn;
     public TableColumn<Product, Integer> quantityColumn;
-    public TableColumn<Product, Button> addColumn;
     public TableColumn<Product, Integer> selectQuantityColumn;
 
     private ObservableList<Product> products;
@@ -35,45 +34,9 @@ public class ProductsController implements Initializable {
         selectQuantityColumn.setCellValueFactory(new PropertyValueFactory<>("selectedQuantity"));
         productsTable.setItems(products);
         setSelectedColumn();
-        setAddToCartColumn();
 
     }
-
-    private void setAddToCartColumn() {
-        addColumn.setCellFactory(new Callback<>() {
-            @Override
-            public TableCell<Product, Button> call(TableColumn<Product, Button> param) {
-                return new TableCell<>() {
-                    private final Button addButton = new Button();
-
-                    {
-                        addButton.setText("Add to Cart");
-                        addButton.setOnAction(event -> {
-                            Product p = getTableView().getItems().get(getTableRow().getIndex());
-
-                            CartController.productsInCart.add(p);
-                        });
-                    }
-
-                    @Override
-                    protected void updateItem(Button item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            Product p = getTableView().getItems().get(getTableRow().getIndex());
-                            if (p.getQuantity() == 0)
-                                addButton.setDisable(true);
-
-                            setGraphic(addButton);
-                        }
-                    }
-                };
-            }
-        });
-
-    }
-
+    
     private void setSelectedColumn() {
         selectQuantityColumn.setCellFactory(tc -> new TableCell<>() {
             private final Spinner<Integer> spinner = new Spinner<>(0, Integer.MAX_VALUE, 0, 1);
