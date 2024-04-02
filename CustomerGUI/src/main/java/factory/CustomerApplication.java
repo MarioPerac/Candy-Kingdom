@@ -5,15 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 
-public class LoginApplication extends Application {
+public class CustomerApplication extends Application {
 
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("view/login-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(CustomerApplication.class.getResource("view/login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Log In");
         stage.setScene(scene);

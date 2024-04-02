@@ -1,7 +1,6 @@
 package factory.controller;
 
-import factory.LoginApplication;
-import javafx.event.Event;
+import factory.CustomerApplication;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -13,7 +12,7 @@ import java.io.IOException;
 public interface Controller {
 
     public static void changeScene(String fxmlFile, MouseEvent actionEvent) {
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginApplication.class.getResource("view/" + fxmlFile));
+        FXMLLoader fxmlLoader = new FXMLLoader(CustomerApplication.class.getResource("view/" + fxmlFile));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Scene scene = null;
         try {

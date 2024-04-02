@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="factory.controller.CartController">
+    <VBox alignment="TOP_CENTER">
+        <TableView fx:id="productsTable" prefWidth="${anchorPane.width}">
+            <columns>
+                <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name"/>
+                <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price"/>
+                <TableColumn fx:id="quantityColumn" prefWidth="75.0" text="Selected"/>
+                <TableColumn fx:id="removeColumn" prefWidth="100.0"/>
+            </columns>
+        </TableView>
+        <Button fx:id="buyButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                onMouseClicked="#onBuyButtonClick" prefHeight="26.0" prefWidth="92.0" text="Buy"/>
+    </VBox>
+</AnchorPane>

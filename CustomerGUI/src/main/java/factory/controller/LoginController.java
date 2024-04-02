@@ -1,20 +1,13 @@
 package factory.controller;
 
-import factory.LoginApplication;
 import factory.model.Login;
 import factory.model.Status;
 import factory.model.UserRequest;
 import factory.service.UserService;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class LoginController {
 
