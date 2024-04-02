@@ -1,22 +1,18 @@
 package factory.service;
 
 import com.google.gson.Gson;
-import factory.LoginApplication;
 import factory.model.Login;
-import factory.model.StatusMessage;
 import factory.model.User;
 import factory.model.UserRequest;
-import factory.properties.UserProperties;
+import factory.properties.ConfigProperties;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.Properties;
 
 public class UserService {
-    UserProperties prop = new UserProperties();
+    ConfigProperties prop = new ConfigProperties();
 
 
     private final Gson gson = new Gson();

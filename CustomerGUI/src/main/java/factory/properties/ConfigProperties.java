@@ -1,15 +1,13 @@
 package factory.properties;
 
-import factory.LoginApplication;
-
 import java.io.IOException;
 import java.util.Properties;
 
-public class UserProperties {
+public class ConfigProperties {
 
     Properties properties = new Properties();
 
-    public UserProperties() {
+    public ConfigProperties() {
 
         try {
             properties.load(getClass().getResourceAsStream("config.properties"));
@@ -20,5 +18,9 @@ public class UserProperties {
 
     public String getUsersURL() {
         return properties.getProperty("users_url");
+    }
+
+    public String getProductsURL() {
+        return properties.getProperty("products_url");
     }
 }
