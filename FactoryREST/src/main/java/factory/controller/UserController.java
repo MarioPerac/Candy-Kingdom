@@ -1,10 +1,7 @@
 package factory.controller;
 
 
-import factory.model.StatusRequest;
-import factory.model.User;
-import factory.model.UserInfo;
-import factory.model.UserRequest;
+import factory.model.*;
 import factory.service.UserService;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -59,11 +56,9 @@ public class UserController {
     @POST
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response userAuthentication(UserRequest req) {
-        if (userService.userAuthentication(req.getUsername(), req.getPassword())) {
-            return Response.status(200).build();
-        } else {
-            return Response.status(400).build();
-        }
+    @Produces(MediaType.APPLICATION_JSON)
+    public Login userAuthentication(UserRequest req) {
+
+        return userService.userAuthentication(req.getUsername(), req.getPassword());
     }
 }

@@ -2,13 +2,13 @@ package factory.service;
 
 import com.google.gson.Gson;
 import factory.LoginApplication;
+import factory.model.Login;
+import factory.model.StatusMessage;
 import factory.model.User;
 import factory.model.UserRequest;
 import factory.properties.UserProperties;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -47,7 +47,7 @@ public class UserService {
         }
     }
 
-    public boolean login(UserRequest req) {
+    public Login login(UserRequest req) {
         HttpURLConnection connection = null;
 
         try {
@@ -61,7 +61,12 @@ public class UserService {
             out.write(gson.toJson(req).getBytes(StandardCharsets.UTF_8));
             out.close();
 
-            return connection.getResponseCode() == HttpURLConnection.HTTP_OK;
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+            Login login = gson.fromJson(in.readLine(), Login.class);
+            in.close();
+
+            return login;
 
         } catch (IOException e) {
             throw new RuntimeException(e);

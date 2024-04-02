@@ -1,6 +1,8 @@
 package factory.controller;
 
 import factory.LoginApplication;
+import factory.model.Login;
+import factory.model.Status;
 import factory.model.UserRequest;
 import factory.service.UserService;
 import javafx.fxml.FXMLLoader;
@@ -37,10 +39,21 @@ public class LoginController {
         if (username.isEmpty() || password.isEmpty()) {
             infoLogInLabel.setText("Please enter all fields.");
         } else {
-            if (userService.login(new UserRequest(username, password))) {
+            Login login = userService.login(new UserRequest(username, password));
+
+            if (login.isSuccessful()) {
                 Controller.changeScene("main-view.fxml", mouseEvent);
+            } else if (Status.PENDING.toString().equals(login.getUserStatus())) {
+                infoLogInLabel.setText("Your request status is PENDING.\nPlease wait until it is processed.");
+            } else if (Status.REJECTED.toString().equals(login.getUserStatus())) {
+                infoLogInLabel.setText("Your request status is REJECTED.");
+            } else if (Status.BLOCKED.toString().equals(login.getUserStatus())) {
+                infoLogInLabel.setText("Your request status is BLOCKED.");
+            } else if (Status.ACCEPTED.toString().equals(login.getUserStatus())) {
+                infoLogInLabel.setText("Incorrect credentials. Try again.");
+
             } else {
-                infoLogInLabel.setText("Try again. Incorrect credentials.");
+                infoLogInLabel.setText("User with this credentials do not exist.");
             }
         }
     }

@@ -1,8 +1,6 @@
 package factory.service;
 
-import factory.model.Status;
-import factory.model.User;
-import factory.model.UserInfo;
+import factory.model.*;
 import factory.repository.UserRepository;
 
 import java.util.List;
@@ -28,7 +26,8 @@ public class UserService {
         return userRepository.delete(username);
     }
 
-    public boolean userAuthentication(String username, String password) {
+    public Login userAuthentication(String username, String password) {
         return userRepository.authentication(username, password);
     }
+    
 }

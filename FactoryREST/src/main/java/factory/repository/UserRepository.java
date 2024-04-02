@@ -2,9 +2,12 @@ package factory.repository;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import factory.model.Login;
+import factory.model.StatusRequest;
 import factory.model.User;
 import factory.model.UserInfo;
 import factory.properties.UserProperties;
+import factory.model.Status;
 
 import java.io.*;
 import java.util.*;
@@ -112,16 +115,18 @@ public class UserRepository {
         return false;
     }
 
-    public boolean authentication(String username, String password) {
+    public Login authentication(String username, String password) {
 
         List<User> users = getAll();
 
         for (User u : users) {
             if (u.getUsername().equals(username)) {
-                return u.getPassword().equals(password);
+                boolean successful = u.getStatus().equals(Status.ACCEPTED.toString()) && u.getPassword().equals(password);
+                return new Login(successful, u.getStatus());
             }
         }
 
-        return false;
+        return new Login(false, null);
     }
+
 }
