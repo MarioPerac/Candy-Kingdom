@@ -2,6 +2,7 @@ package factory.controller;
 
 import factory.model.Login;
 import factory.model.Status;
+import factory.model.UserInfo;
 import factory.model.UserRequest;
 import factory.service.UserService;
 import javafx.scene.control.Label;
@@ -36,6 +37,9 @@ public class LoginController {
 
             if (login.isSuccessful()) {
                 Controller.changeScene("main-view.fxml", mouseEvent);
+                String userEmail = userService.getUserEmail(username);
+                UserInfo.getInstance().setUsername(username);
+                UserInfo.getInstance().setEmail(userEmail);
             } else if (Status.PENDING.toString().equals(login.getUserStatus())) {
                 infoLogInLabel.setText("Your request status is PENDING.\nPlease wait until it is processed.");
             } else if (Status.REJECTED.toString().equals(login.getUserStatus())) {
@@ -46,7 +50,7 @@ public class LoginController {
                 infoLogInLabel.setText("Incorrect credentials. Try again.");
 
             } else {
-                infoLogInLabel.setText("User with this credentials do not exist.");
+                infoLogInLabel.setText("User with this credentials does not exist.");
             }
         }
     }

@@ -1,15 +1,21 @@
 package factory.controller;
 
+import factory.model.Order;
+import factory.model.OrderedProduct;
 import factory.model.Product;
+import factory.model.UserInfo;
+import factory.service.OrderService;
 import factory.service.ProductService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ProductsController implements Initializable {
@@ -21,6 +27,8 @@ public class ProductsController implements Initializable {
     public TableColumn<Product, Integer> selectQuantityColumn;
 
     private ObservableList<Product> products;
+
+    OrderService orderService = new OrderService();
 
     ProductService productService = new ProductService();
 
@@ -36,7 +44,7 @@ public class ProductsController implements Initializable {
         setSelectedColumn();
 
     }
-    
+
     private void setSelectedColumn() {
         selectQuantityColumn.setCellFactory(tc -> new TableCell<>() {
             private final Spinner<Integer> spinner = new Spinner<>(0, Integer.MAX_VALUE, 0, 1);
@@ -68,4 +76,19 @@ public class ProductsController implements Initializable {
     }
 
 
+    public void onBuyButtonClick(MouseEvent mouseEvent) {
+
+        ArrayList<OrderedProduct> orderedProducts = new ArrayList<>();
+        for (Product p : products) {
+            if (p.getSelectedQuantity() > 0) {
+                orderedProducts.add(new OrderedProduct(p.getName(), p.getPrice(), p.getSelectedQuantity()));
+            }
+        }
+
+        UserInfo userInfo = UserInfo.getInstance();
+        orderService.create(new Order(orderedProducts, userInfo.getUsername(), userInfo.getEmail()));
+        productService.decreaseProductsQuantity(orderedProducts);
+        products.removeAll();
+        products.setAll(productService.getAll());
+    }
 }

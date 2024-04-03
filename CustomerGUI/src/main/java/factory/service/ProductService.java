@@ -1,12 +1,11 @@
 package factory.service;
 
 import com.google.gson.Gson;
+import factory.model.OrderedProduct;
 import factory.model.Product;
 import factory.properties.ConfigProperties;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -45,5 +44,24 @@ public class ProductService {
             throw new RuntimeException(e);
         }
 
+    }
+
+
+    public void decreaseProductsQuantity(List<OrderedProduct> orderedProducts) {
+        HttpURLConnection connection = null;
+
+        try {
+            URL url = new URL(prop.getProductsURL() + "/decrease");
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("PUT");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setDoOutput(true);
+
+            PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(connection.getOutputStream())));
+            out.write(gson.toJson(orderedProducts));
+            out.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

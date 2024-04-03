@@ -26,8 +26,9 @@
                 <Insets/>
             </GridPane.margin>
         </TableView>
-        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="86.0" text="Buy" GridPane.halignment="CENTER"
-                GridPane.rowIndex="1" GridPane.valignment="CENTER">
+        <Button fx:id="buyButton" mnemonicParsing="false" onMouseClicked="#onBuyButtonClick" prefHeight="35.0"
+                prefWidth="86.0" text="Buy" GridPane.halignment="CENTER" GridPane.rowIndex="1"
+                GridPane.valignment="CENTER">
             <GridPane.margin>
                 <Insets bottom="10.0" top="10.0"/>
             </GridPane.margin>

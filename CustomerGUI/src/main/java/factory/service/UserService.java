@@ -8,6 +8,7 @@ import factory.properties.ConfigProperties;
 
 import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
@@ -69,6 +70,27 @@ public class UserService {
         } finally {
             if (connection != null)
                 connection.disconnect();
+        }
+
+    }
+
+    public String getUserEmail(String username) {
+        HttpURLConnection connection = null;
+
+        try {
+            URL url = new URL(prop.getUsersURL() + "/" + username + "/email");
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Accept", "application/json");
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+            String email = in.readLine();
+            in.close();
+
+            return email;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
     }

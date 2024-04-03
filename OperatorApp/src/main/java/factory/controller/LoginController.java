@@ -25,7 +25,7 @@ public class LoginController {
             Controller.changeScene("main-view.fxml", mouseEvent);
             }
             else{
-                infoLogInLabel.setText("Operator with this credentials do not exist.");
+                infoLogInLabel.setText("Operator with this credentials does not exist.");
             }
         }
     }

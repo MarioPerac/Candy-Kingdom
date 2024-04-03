@@ -1,6 +1,7 @@
 package factory.controller;
 
 import factory.CustomerApplication;
+import factory.model.UserInfo;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -12,8 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainController {
-
-
+    
     public BorderPane borderPane;
 
     public void onLogoutButtonClicked(MouseEvent mouseEvent) {
@@ -33,15 +33,5 @@ public class MainController {
         borderPane.setCenter(root);
     }
 
-    public void onCartButtonClick(MouseEvent mouseEvent) {
-        Parent root = null;
 
-        try {
-            root = FXMLLoader.load(CustomerApplication.class.getResource("view/cart.fxml"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        borderPane.setCenter(root);
-    }
 }
