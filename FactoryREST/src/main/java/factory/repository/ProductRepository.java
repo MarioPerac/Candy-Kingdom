@@ -1,5 +1,6 @@
 package factory.repository;
 
+import factory.model.OrderedProduct;
 import factory.model.Product;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -11,7 +12,7 @@ import java.util.Map;
 public class ProductRepository {
 
     private static final String instanceName = "DB";
-    JedisPool pool = new JedisPool("localhost", 6379);
+    private JedisPool pool = new JedisPool("localhost", 6379);
 
     public void add(Product product) {
         try (Jedis jedis = pool.getResource()) {
@@ -39,6 +40,18 @@ public class ProductRepository {
                     products.add(new Product(name, price, quantity));
             }
             return products;
+        }
+    }
+
+    public void decreaseProductQuantity(List<OrderedProduct> orderedProducts) {
+
+        for (OrderedProduct op : orderedProducts) {
+            try (Jedis jedis = pool.getResource()) {
+                int quantity = Integer.parseInt(jedis.hget(instanceName + ":products:map:" + op.getName(), "quantity"));
+                int newQuantity = quantity - op.getSelectedQuantity();
+                jedis.hset(instanceName + ":products:map:" + op.getName(), "quantity", String.valueOf(newQuantity));
+            }
+
         }
     }
 }

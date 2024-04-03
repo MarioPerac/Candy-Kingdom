@@ -1,12 +1,13 @@
 package factory.controller;
 
+import factory.model.OrderedProduct;
 import factory.model.Product;
 import factory.service.ProductService;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
+import javax.print.attribute.standard.Media;
 import java.util.List;
 
 @Path("/products")
@@ -18,5 +19,12 @@ public class ProductController {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Product> getAllAvailable() {
         return productService.getAllAvailable();
+    }
+
+    @PUT
+    @Path("/decrease")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void updateProducts(List<OrderedProduct> orderedProducts) {
+        productService.decreaseProductQuantity(orderedProducts);
     }
 }

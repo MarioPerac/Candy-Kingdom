@@ -21,6 +21,18 @@ public class UserController {
         return userService.getUsers();
     }
 
+    @GET
+    @Path("/{username}/email")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUserEmail(@PathParam("username") String username) {
+        String email = userService.getUserEmail(username);
+        if (email != null) {
+            return Response.status(200).entity(email).build();
+        } else {
+            return Response.status(400).build();
+        }
+    }
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response registerUser(User user) {
