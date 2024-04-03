@@ -1,6 +1,7 @@
 package factory.properties;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.Properties;
 
 public class ConfigProperties {
@@ -23,4 +24,6 @@ public class ConfigProperties {
     public String getProductsURL() {
         return properties.getProperty("products_url");
     }
+
+    
 }

@@ -3,13 +3,11 @@ package factory.service;
 import com.google.gson.Gson;
 import factory.model.StatusRequest;
 import factory.model.User;
-import factory.properties.UserProperties;
+import factory.properties.ConfigProperties;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +15,7 @@ import java.util.List;
 
 public class UserService {
 
-    private final UserProperties prop = new UserProperties();
+    private final ConfigProperties prop = new ConfigProperties();
     private final Gson gson = new Gson();
     public List<User> getAll(){
 

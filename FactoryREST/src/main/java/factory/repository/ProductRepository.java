@@ -4,9 +4,7 @@ import factory.model.Product;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
-import javax.naming.ldap.HasControls;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +27,7 @@ public class ProductRepository {
         }
     }
 
-    public List<Product> getAll() {
+    public List<Product> getAllAvailable() {
         try (Jedis jedis = pool.getResource()) {
             List<Product> products = new ArrayList<>();
             for (String key : jedis.keys(instanceName + ":products:map:*")) {
@@ -37,7 +35,8 @@ public class ProductRepository {
                 String name = productAttributes.get("name");
                 Double price = Double.parseDouble(productAttributes.get("price"));
                 int quantity = Integer.parseInt(productAttributes.get("quantity"));
-                products.add(new Product(name, price, quantity));
+                if (quantity > 0)
+                    products.add(new Product(name, price, quantity));
             }
             return products;
         }
