@@ -1,0 +1,5 @@
+User: mario
+E-mail:peracmario@outlook.com
+Order status: ACCEPTED
+Ordered products:
+name= Product 9, price=11.39$, selectedQuantity=1

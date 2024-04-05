@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="factory.controller.OrderController">
+    <VBox alignment="TOP_CENTER">
+        <VBox alignment="CENTER_LEFT" prefHeight="78.0" prefWidth="327.0">
+            <Label text="User" />
+         <Label fx:id="usernameLabel" />
+            <Label text="E-mail" />
+         <Label fx:id="emailLabel" />
+         <padding>
+            <Insets left="10.0" top="10.0" />
+         </padding>
+        </VBox>
+        <TableView fx:id="productsTable" prefHeight="308.0" prefWidth="327.0">
+            <columns>
+                <TableColumn fx:id="nameColumn" prefWidth="128.20000612735748" text="Name" />
+                <TableColumn fx:id="priceColumn" prefWidth="118.0" text="Price" />
+                <TableColumn fx:id="quantityColumn" prefWidth="77.20001220703125" text="Selected" />
+            </columns>
+        </TableView>
+        <HBox alignment="CENTER" prefHeight="68.0" prefWidth="327.0" spacing="20.0">
+            <Button fx:id="acceptButton" mnemonicParsing="false" onMouseClicked="#onAcceptButtonClick" style="-fx-background-color: lightgreen;" text="Accept" />
+            <Button fx:id="rejectButton" mnemonicParsing="false" onMouseClicked="#onRejectButtonClick" style="-fx-background-color: red;" text="Reject" textFill="WHITE" />
+        </HBox>
+    </VBox>
+</AnchorPane>

@@ -16,13 +16,16 @@ public class ConfigProperties {
         }
     }
 
-
-    public String getTrustStorePath() {
-        return properties.getProperty("truststore_path");
+    public String getUsersURL() {
+        return properties.getProperty("users_url");
     }
 
-    public String getTrustStorePassword() {
-        return properties.getProperty("truststore_password");
+    public String getKeyStorePath() {
+        return properties.getProperty("keystore_path");
+    }
+
+    public String getKeyStorePassword() {
+        return properties.getProperty("keystore_password");
     }
 
     public String getServerAddress() {
@@ -32,5 +35,12 @@ public class ConfigProperties {
     public int getServerPort() {
         return Integer.parseInt(properties.getProperty("server_port"));
     }
-    
+
+    public String getFactoryUsersPath() {
+        return properties.getProperty("factory_users_path");
+    }
+
+    public String getOrdersPath() {
+        return properties.getProperty("orders_path");
+    }
 }
