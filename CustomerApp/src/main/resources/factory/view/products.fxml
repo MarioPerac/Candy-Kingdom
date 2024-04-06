@@ -4,30 +4,31 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane prefHeight="482.0" prefWidth="413.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+<GridPane prefHeight="482.0" prefWidth="474.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
           xmlns:fx="http://javafx.com/fxml/1" fx:controller="factory.controller.ProductsController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
     </columnConstraints>
     <rowConstraints>
         <RowConstraints maxHeight="39.0" minHeight="0.0" prefHeight="39.0" vgrow="SOMETIMES"/>
-        <RowConstraints maxHeight="430.0" minHeight="10.0" prefHeight="388.4" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="39.0" minHeight="0.0" prefHeight="39.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="430.0" minHeight="10.0" prefHeight="300" vgrow="SOMETIMES"/>
         <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <Button fx:id="logOutButton" alignment="TOP_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false"
-            onMouseDragged="#onLogOutButtonClick" text="Log out" GridPane.halignment="RIGHT"
+            onMouseClicked="#onLogOutButtonClick" text="Log out" GridPane.halignment="RIGHT"
             GridPane.valignment="CENTER">
         <GridPane.margin>
             <Insets bottom="10.0" right="10.0" top="10.0"/>
         </GridPane.margin>
     </Button>
-    <TableView fx:id="productsTable" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1"
-               GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+    <TableView fx:id="productsTable" prefHeight="347.0" prefWidth="447.0" GridPane.halignment="CENTER"
+               GridPane.hgrow="SOMETIMES" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
         <columns>
-            <TableColumn fx:id="nameColumn" editable="false" prefWidth="120.0" text="Name"/>
-            <TableColumn fx:id="priceColumn" editable="false" prefWidth="100.0" text="Price"/>
-            <TableColumn fx:id="quantityColumn" editable="false" prefWidth="102.39996337890625" text="Quantity"/>
-            <TableColumn fx:id="selectQuantityColumn" prefWidth="86.4000244140625" text="Selected"/>
+            <TableColumn fx:id="nameColumn" editable="false" prefWidth="146.00002133846283" text="Name"/>
+            <TableColumn fx:id="priceColumn" editable="false" prefWidth="93.0" text="Price"/>
+            <TableColumn fx:id="quantityColumn" editable="false" prefWidth="97.39999389648438" text="Quantity"/>
+            <TableColumn fx:id="selectQuantityColumn" prefWidth="137.20001220703125" text="Selected"/>
         </columns>
         <GridPane.margin>
             <Insets/>
@@ -35,9 +36,10 @@
     </TableView>
     <Button fx:id="buyButton" mnemonicParsing="false" onMouseClicked="#onBuyButtonClick" prefHeight="35.0"
             prefWidth="86.0" style="-fx-background-color: lightgreen;" text="Order" GridPane.halignment="CENTER"
-            GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            GridPane.rowIndex="3" GridPane.valignment="CENTER">
         <GridPane.margin>
             <Insets bottom="10.0" top="10.0"/>
         </GridPane.margin>
     </Button>
+    <Label fx:id="messageLabel" prefHeight="39.0" prefWidth="486.0" wrapText="true" GridPane.rowIndex="1"/>
 </GridPane>

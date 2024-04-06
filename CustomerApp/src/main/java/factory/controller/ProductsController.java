@@ -1,30 +1,37 @@
 package factory.controller;
 
+import factory.listener.MessageListener;
 import factory.model.Order;
 import factory.model.OrderedProduct;
 import factory.model.Product;
 import factory.model.UserInfo;
+import factory.service.MulticastService;
 import factory.service.OrderService;
 import factory.service.ProductService;
+import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.util.Callback;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class ProductsController implements Initializable {
+public class ProductsController implements Initializable, MessageListener {
 
     public TableView<Product> productsTable;
     public TableColumn<Product, String> nameColumn;
     public TableColumn<Product, Double> priceColumn;
     public TableColumn<Product, Integer> quantityColumn;
     public TableColumn<Product, Integer> selectQuantityColumn;
+
+    public Label messageLabel;
 
     private ObservableList<Product> products;
 
@@ -42,7 +49,7 @@ public class ProductsController implements Initializable {
         selectQuantityColumn.setCellValueFactory(new PropertyValueFactory<>("selectedQuantity"));
         productsTable.setItems(products);
         setSelectedColumn();
-
+        MulticastService.setMessageListener(this::onMessageReceived);
     }
 
     private void showAlertAndWait(Alert.AlertType type, String title, String context) {
@@ -108,5 +115,11 @@ public class ProductsController implements Initializable {
 
     public void onLogOutButtonClick(MouseEvent mouseEvent) {
         Controller.changeScene("login-view.fxml", mouseEvent);
+    }
+
+
+    @Override
+    public void onMessageReceived(String message) {
+        Platform.runLater(() -> messageLabel.setText(message));
     }
 }

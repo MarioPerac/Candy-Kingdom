@@ -43,4 +43,12 @@ public class ConfigProperties {
     public String getOrdersPath() {
         return properties.getProperty("orders_path");
     }
+
+    public String getMulticastPort() {
+        return properties.getProperty("multicast_port");
+    }
+
+    public String getMulticastAddress() {
+        return properties.getProperty("multicast_address");
+    }
 }

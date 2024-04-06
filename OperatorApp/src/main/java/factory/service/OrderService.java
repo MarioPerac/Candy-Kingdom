@@ -3,13 +3,8 @@ package factory.service;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.rabbitmq.client.*;
 import factory.model.Order;
-import factory.model.OrderedProduct;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 

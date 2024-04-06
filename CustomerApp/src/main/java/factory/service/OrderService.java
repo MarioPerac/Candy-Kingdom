@@ -22,6 +22,7 @@ public class OrderService {
             channel.queueDeclare(QUEUE_NAME, true, false, false, null);
 
             String orderXML = mapper.writeValueAsString(order);
+            System.out.println(orderXML);
             channel.basicPublish("", QUEUE_NAME, null, orderXML.getBytes(StandardCharsets.UTF_8));
         } catch (IOException | TimeoutException e) {
             throw new RuntimeException(e);

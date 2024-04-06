@@ -44,6 +44,7 @@ public class UsersController implements Initializable {
 
     UserService userService = new UserService();
     ObservableList<User> users;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -74,14 +75,13 @@ public class UsersController implements Initializable {
                         acceptButton.setOnAction(event -> {
                             User user = getTableView().getItems().get(getTableRow().getIndex());
 
-                            if (user.getStatus().equals(Status.PENDING.toString()) ) {
+                            if (user.getStatus().equals(Status.PENDING.toString())) {
                                 user.setStatus(Status.ACCEPTED.toString());
                                 boolean result = userService.changeUserStatus(user.getUsername(), new StatusRequest(user.getStatus()));
                                 System.out.println(result);
                                 usersTableView.refresh();
-                            }
-                            else if(user.getStatus().equals(Status.ACCEPTED.toString())){
-                                if(userService.deleteUser(user.getUsername())){
+                            } else if (user.getStatus().equals(Status.ACCEPTED.toString())) {
+                                if (userService.deleteUser(user.getUsername())) {
                                     usersTableView.getItems().remove(user);
                                 }
 
@@ -100,10 +100,9 @@ public class UsersController implements Initializable {
 
                             if (user.getStatus().equals(Status.PENDING.toString())) {
                                 acceptButton.setText("Accept");
-                            } else if(user.getStatus().equals(Status.ACCEPTED.toString())) {
+                            } else if (user.getStatus().equals(Status.ACCEPTED.toString())) {
                                 acceptButton.setText("Delete");
-                            }
-                            else {
+                            } else {
                                 acceptButton.setText("Delete");
                                 acceptButton.setDisable(true);
                             }
@@ -126,15 +125,13 @@ public class UsersController implements Initializable {
                     {
                         rejectButton.setOnAction(event -> {
                             User user = getTableView().getItems().get(getTableRow().getIndex());
-                            // Handle reject action based on user status
+
                             if (user.getStatus().equals(Status.PENDING.toString())) {
 
                                 user.setStatus(Status.REJECTED.toString());
                                 userService.changeUserStatus(user.getUsername(), new StatusRequest(user.getStatus()));
                                 usersTableView.refresh();
-                            }
-                            else if(user.getStatus().equals(Status.ACCEPTED.toString()))
-                            {
+                            } else if (user.getStatus().equals(Status.ACCEPTED.toString())) {
                                 user.setStatus(Status.BLOCKED.toString());
                                 userService.changeUserStatus(user.getUsername(), new StatusRequest(user.getStatus()));
                                 usersTableView.refresh();
@@ -153,10 +150,9 @@ public class UsersController implements Initializable {
 
                             if (user.getStatus().equals(Status.PENDING.toString())) {
                                 rejectButton.setText("Reject");
-                            } else if(user.getStatus().equals(Status.ACCEPTED.toString())) {
+                            } else if (user.getStatus().equals(Status.ACCEPTED.toString())) {
                                 rejectButton.setText("Block");
-                            }
-                            else{
+                            } else {
                                 rejectButton.setText("Block");
                                 rejectButton.setDisable(true);
                             }

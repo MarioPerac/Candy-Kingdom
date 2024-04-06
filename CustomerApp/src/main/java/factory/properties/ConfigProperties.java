@@ -25,5 +25,11 @@ public class ConfigProperties {
         return properties.getProperty("products_url");
     }
 
-    
+    public String getMulticastPort() {
+        return properties.getProperty("multicast_port");
+    }
+
+    public String getMulticastAddress() {
+        return properties.getProperty("multicast_address");
+    }
 }
