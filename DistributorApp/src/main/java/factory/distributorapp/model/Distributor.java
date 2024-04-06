@@ -11,10 +11,10 @@ public class Distributor {
     }
 
     public static Distributor getInstance(){
-        if(instance != null)
-            return instance;
-        else
-            return new Distributor();
+        if (instance == null) {
+            instance = new Distributor();
+        }
+        return instance;
     }
 
     public String getName() {

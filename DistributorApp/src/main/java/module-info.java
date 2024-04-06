@@ -8,4 +8,6 @@ module factory.distributorapp {
     opens factory.distributorapp to javafx.fxml;
     exports factory.distributorapp;
     exports factory.distributorapp.controller;
+    exports factory.distributorapp.listener;
+    exports factory.distributorapp.model;
 }

@@ -4,14 +4,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane prefHeight="482.0" prefWidth="474.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="factory.distributorapp.controller.ProductsController">
+<GridPane prefHeight="542.0" prefWidth="378.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="factory.distributorapp.controller.ProductsController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
     </columnConstraints>
     <rowConstraints>
         <RowConstraints maxHeight="46.00000151991844" minHeight="0.0" prefHeight="46.00000151991844" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="467.6" minHeight="366.60000190734866" prefHeight="422.5999980926514" />
-        <RowConstraints maxHeight="46.00000151991844" minHeight="0.0" prefHeight="46.00000151991844" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="46.00000151991844" minHeight="0.0" prefHeight="46.00000151991844" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="467.6" minHeight="366.60000190734866" prefHeight="422.5999980926514" />
+      <RowConstraints maxHeight="46.00000151991844" minHeight="0.0" prefHeight="46.00000151991844" vgrow="SOMETIMES" />
 
     </rowConstraints>
     <Button fx:id="logOutButton" alignment="TOP_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#onLogOutButtonClick" text="Log out" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
@@ -19,15 +20,25 @@
             <Insets bottom="10.0" right="10.0" top="10.0" />
         </GridPane.margin>
     </Button>
-    <TableView fx:id="productsTable" prefHeight="435.0" prefWidth="403.0" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+    <TableView fx:id="productsTable" prefHeight="418.0" prefWidth="420.0" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="2" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
         <columns>
-            <TableColumn fx:id="nameColumn" editable="false" prefWidth="146.00002133846283" text="Name" />
-            <TableColumn fx:id="priceColumn" editable="false" prefWidth="93.0" text="Price" />
-            <TableColumn fx:id="quantityColumn" editable="false" prefWidth="128.59996032714844" text="Quantity" />
+            <TableColumn fx:id="nameColumn" editable="false" prefWidth="171.8000122308731" text="Name" />
+            <TableColumn fx:id="priceColumn" editable="false" prefWidth="104.19998168945312" text="Price" />
+            <TableColumn fx:id="quantityColumn" editable="false" prefWidth="100.80002441406248" text="Quantity" />
         </columns>
         <GridPane.margin>
             <Insets />
         </GridPane.margin>
     </TableView>
-   <Button mnemonicParsing="false" text="Add" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+   <Button fx:id="addProductButton" mnemonicParsing="false" onMouseClicked="#onAddProductButtonClick" prefHeight="26.0" prefWidth="106.0" text=" Add Product" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+      <GridPane.margin>
+         <Insets top="5.0" />
+      </GridPane.margin></Button>
+    <HBox prefHeight="26.0" prefWidth="474.0" spacing="10.0" GridPane.rowIndex="1">
+        <padding>
+            <Insets left="5.0"/>
+        </padding>
+        <Label text="Distributor:"/>
+        <Label fx:id="distributorNameLabel"/>
+    </HBox>
 </GridPane>

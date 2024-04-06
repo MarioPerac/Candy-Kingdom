@@ -20,7 +20,7 @@ public interface Controller {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        stage.setTitle("Candy Kingdom");
+        stage.setTitle("Candy Kingdom Distributor");
         stage.setScene(scene);
         fxmlLoader.getController();
         stage.show();

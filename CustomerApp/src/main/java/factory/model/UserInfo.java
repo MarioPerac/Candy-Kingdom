@@ -1,21 +1,20 @@
 package factory.model;
 
-import factory.service.UserService;
 
 public class UserInfo {
     private String username;
     private String email;
 
-    private static UserInfo inctance;
+    private static UserInfo instance;
 
     public UserInfo() {
     }
 
     public static UserInfo getInstance() {
-        if (inctance == null) {
-            inctance = new UserInfo();
+        if (instance == null) {
+            instance = new UserInfo();
         }
-        return inctance;
+        return instance;
     }
 
     public String getUsername() {
