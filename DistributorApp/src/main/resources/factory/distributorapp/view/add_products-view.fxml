@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="388.0" prefWidth="402.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="factory.distributorapp.controller.AddProductsController">
+   <TextField fx:id="nameTextField" layoutX="99.0" layoutY="95.0" prefHeight="26.0" prefWidth="203.0" promptText="Name" />
+   <TextField fx:id="priceTextField" layoutX="99.0" layoutY="137.0" prefHeight="26.0" prefWidth="203.0" promptText="Price" />
+   <TextField fx:id="quantityTextField" layoutX="99.0" layoutY="179.0" prefHeight="26.0" prefWidth="203.0" promptText="Quantity" />
+   <Button fx:id="addButton" layoutX="159.0" layoutY="262.0" mnemonicParsing="false" onMouseClicked="#onAddButtonClick" prefHeight="34.0" prefWidth="82.0" text="Add" />
+   <Label layoutX="113.0" layoutY="69.0" prefHeight="18.0" prefWidth="94.0" text="Product">
+      <font>
+         <Font size="14.0" />
+      </font>
+   </Label>
+</AnchorPane>
