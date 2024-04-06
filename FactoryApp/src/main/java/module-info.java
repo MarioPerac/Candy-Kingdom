@@ -6,6 +6,7 @@ module factory {
     requires org.kordamp.bootstrapfx.core;
     requires javafx.graphics;
     requires com.google.gson;
+    requires java.rmi;
 
     opens factory.controller to javafx.fxml;
     exports factory.controller;

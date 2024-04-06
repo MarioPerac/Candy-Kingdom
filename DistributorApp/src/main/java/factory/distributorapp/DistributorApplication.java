@@ -1,11 +1,13 @@
 package factory.distributorapp;
 
+import factory.distributorapp.rmi.DistributorServer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 
 public class DistributorApplication extends Application {
     @Override
@@ -19,5 +21,10 @@ public class DistributorApplication extends Application {
 
     public static void main(String[] args) {
         launch();
+        try {
+            DistributorServer.getInstance().stopServer();
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

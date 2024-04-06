@@ -1,8 +1,11 @@
 package factory.distributorapp.controller;
 
 import factory.distributorapp.model.Distributor;
+import factory.distributorapp.rmi.DistributorServer;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+
+import java.rmi.RemoteException;
 
 public class LoginController {
     public TextField distriubtorTextField;
@@ -13,6 +16,11 @@ public class LoginController {
         String name = distriubtorTextField.getText();
         if(!name.isEmpty()) {
             Distributor.getInstance().setName(name);
+            try {
+                DistributorServer.getInstance().start();
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
             Controller.changeScene("products-view.fxml", mouseEvent);
         }
     }

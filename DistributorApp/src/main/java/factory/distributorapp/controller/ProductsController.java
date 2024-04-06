@@ -4,6 +4,7 @@ import factory.distributorapp.DistributorApplication;
 import factory.distributorapp.listener.ProductListener;
 import factory.distributorapp.model.Distributor;
 import factory.distributorapp.model.Product;
+import factory.distributorapp.model.Repository;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,9 +24,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class ProductsController implements Initializable, ProductListener{
+public class ProductsController implements Initializable{
 
     public TableView<Product> productsTable;
     public TableColumn<Product, String> nameColumn;
@@ -33,27 +35,20 @@ public class ProductsController implements Initializable, ProductListener{
     public TableColumn<Product, Integer> quantityColumn;
     public Label distributorNameLabel;
 
-    private ObservableList<Product> products;
-
     public void onLogOutButtonClick(MouseEvent mouseEvent) {
         Controller.changeScene("login-view.fxml", mouseEvent);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        products = FXCollections.observableArrayList();
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        productsTable.setItems(products);
+        productsTable.setItems(Repository.getInstance().getProducts());
         distributorNameLabel.setText(Distributor.getInstance().getName());
     }
 
 
-    @Override
-    public void add(Product product) {
-        products.add(product);
-    }
 
     public void onAddProductButtonClick(MouseEvent mouseEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(DistributorApplication.class.getResource("view/add_products-view.fxml"));
@@ -65,7 +60,6 @@ public class ProductsController implements Initializable, ProductListener{
             dialogStage.initOwner(((Node) mouseEvent.getSource()).getScene().getWindow());
             dialogStage.setScene(new Scene(root));
             AddProductsController addProductsController = fxmlLoader.getController();
-            addProductsController.setProductListener(this);
             dialogStage.showAndWait();
         } catch (IOException e) {
             throw new RuntimeException(e);

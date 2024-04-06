@@ -1,6 +1,7 @@
 package factory.controller;
 
 import factory.FactoryApplication;
+import factory.rmi.DistributorClient;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -39,5 +40,24 @@ public class MainController {
         }
 
         borderPane.setCenter(root);
+    }
+
+    public void onDistributorsButtonClick(MouseEvent mouseEvent) {
+        FXMLLoader loader = new FXMLLoader(FactoryApplication.class.getResource("view/distributors-view.fxml"));
+        Parent root = null;
+        try {
+            root = loader.load();
+            DistributorsController distributorsController = loader.getController();
+            for (String s : DistributorClient.getInstance().getDistributors()) {
+                System.out.println(s);
+            }
+            distributorsController.addDistributors(DistributorClient.getInstance().getDistributors());
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        borderPane.setCenter(root);
+
     }
 }

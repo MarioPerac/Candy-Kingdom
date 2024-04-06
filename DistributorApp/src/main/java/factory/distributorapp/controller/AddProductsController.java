@@ -2,6 +2,7 @@ package factory.distributorapp.controller;
 
 import factory.distributorapp.listener.ProductListener;
 import factory.distributorapp.model.Product;
+import factory.distributorapp.model.Repository;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
@@ -17,7 +18,7 @@ public class AddProductsController {
         Double price =Double.parseDouble(priceTextField.getText());
         int quantity = Integer.parseInt(quantityTextField.getText());
 
-        productListener.add(new Product(name, price,quantity));
+        Repository.getInstance().add(new Product(name, price,quantity));
     }
 
     public void setProductListener(ProductListener productListener) {
