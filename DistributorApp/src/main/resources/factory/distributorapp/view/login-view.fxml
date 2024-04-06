@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="286.0" prefWidth="432.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="factory.distributorapp.controller.LoginController">
+   <TextField fx:id="distriubtorTextField" layoutX="81.0" layoutY="103.0" prefHeight="26.0" prefWidth="269.0" promptText="Distributor name" />
+   <Button fx:id="loginButton" layoutX="164.0" layoutY="190.0" mnemonicParsing="false" onMouseClicked="#onLoginButtonClick" prefHeight="34.0" prefWidth="103.0" text="Log In" />
+   <Label layoutX="89.0" layoutY="84.0" prefHeight="18.0" prefWidth="59.0" text="Distributor" />
+</AnchorPane>
