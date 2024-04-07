@@ -1,13 +1,15 @@
 package factory.service;
 
-import factory.controller.ProductsController;
+
 import factory.listener.MessageListener;
+import factory.logger.AppLogger;
 import factory.properties.ConfigProperties;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.util.logging.Level;
 
 public class MulticastService extends Thread {
 
@@ -27,7 +29,7 @@ public class MulticastService extends Thread {
             client = new MulticastSocket(PORT);
             client.joinGroup(ADDRESS);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
         }
     }
 
@@ -43,7 +45,7 @@ public class MulticastService extends Thread {
             try {
                 client.receive(packet);
             } catch (IOException e) {
-                e.printStackTrace();
+                AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
             }
 
             String message = new String(packet.getData(), 0, packet.getLength());
@@ -52,7 +54,7 @@ public class MulticastService extends Thread {
 
         }
 
-        System.out.println("Multicast srice finished.");
+        System.out.println("Multicast service finished.");
     }
 
     public static void setMessageListener(MessageListener listener) {

@@ -1,6 +1,7 @@
 package factory.controller;
 
 import factory.FactoryApplication;
+import factory.logger.AppLogger;
 import factory.rmi.DistributorClient;
 import factory.rmi.DistributorInterface;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.logging.Level;
 
 public class DistributorsController {
     public VBox mainVBox;
@@ -46,7 +48,7 @@ public class DistributorsController {
             controller.setProducts(distributor.getProducts());
             dialogStage.showAndWait();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
         }
     }
 }

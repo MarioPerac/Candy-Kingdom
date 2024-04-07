@@ -6,7 +6,7 @@ import java.util.Properties;
 
 public class ConfigProperties {
 
-    Properties properties = new Properties();
+    private Properties properties = new Properties();
 
     public ConfigProperties() {
 
@@ -31,5 +31,9 @@ public class ConfigProperties {
 
     public String getMulticastAddress() {
         return properties.getProperty("multicast_address");
+    }
+
+    public String getLogFilePath() {
+        return properties.getProperty("log_file");
     }
 }

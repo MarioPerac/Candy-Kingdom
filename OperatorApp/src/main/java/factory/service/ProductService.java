@@ -1,5 +1,6 @@
 package factory.service;
 
+import factory.logger.AppLogger;
 import factory.model.OrderedProduct;
 import factory.properties.ConfigProperties;
 
@@ -10,6 +11,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
+import java.util.logging.Level;
 
 import com.google.gson.Gson;
 
@@ -37,6 +39,7 @@ public class ProductService {
                 connection.disconnect();
             }
         } catch (IOException e) {
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
             throw new RuntimeException("Failed to send request", e);
         }
     }

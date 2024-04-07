@@ -1,17 +1,18 @@
 package factory.service;
 
 import com.google.gson.Gson;
+import factory.logger.AppLogger;
 import factory.model.OrderedProduct;
 import factory.model.Product;
 import factory.properties.ConfigProperties;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
 
 public class ProductService {
 
@@ -23,6 +24,7 @@ public class ProductService {
 
         HttpURLConnection connection = null;
 
+        ArrayList<Product> productsList = null;
         try {
             URL url = new URL(prop.getProductsURL());
             connection = (HttpURLConnection) url.openConnection();
@@ -38,12 +40,12 @@ public class ProductService {
             }
 
             Product[] products = gson.fromJson(jsonContent.toString(), Product[].class);
-            return new ArrayList<>(Arrays.asList(products));
+            productsList = new ArrayList<>(Arrays.asList(products));
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
         }
-
+        return productsList;
     }
 
 
@@ -66,7 +68,7 @@ public class ProductService {
                 connection.disconnect();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Failed to send request", e);
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
         }
     }
 }

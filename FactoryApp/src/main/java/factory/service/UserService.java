@@ -1,6 +1,7 @@
 package factory.service;
 
 import com.google.gson.Gson;
+import factory.logger.AppLogger;
 import factory.model.StatusRequest;
 import factory.model.User;
 import factory.properties.ConfigProperties;
@@ -11,13 +12,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
 
 
 public class UserService {
 
     private final ConfigProperties prop = new ConfigProperties();
     private final Gson gson = new Gson();
-    public List<User> getAll(){
+
+    public List<User> getAll() {
 
         HttpURLConnection connection = null;
         try {
@@ -30,14 +33,15 @@ public class UserService {
             StringBuffer jsonContent = new StringBuffer();
 
             String line = "";
-            while((line = in.readLine()) != null){
+            while ((line = in.readLine()) != null) {
                 jsonContent.append(line);
             }
 
-           User[] users =  gson.fromJson(jsonContent.toString(), User[].class);
+            User[] users = gson.fromJson(jsonContent.toString(), User[].class);
             return new ArrayList<>(Arrays.asList(users));
 
         } catch (IOException e) {
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
             throw new RuntimeException(e);
         } finally {
             if (connection != null)
@@ -45,7 +49,7 @@ public class UserService {
         }
     }
 
-    public boolean deleteUser(String username){
+    public boolean deleteUser(String username) {
         HttpURLConnection connection = null;
         try {
             URL url = new URL(prop.getUsersURL() + "/" + username);
@@ -65,8 +69,8 @@ public class UserService {
         }
     }
 
-    public boolean changeUserStatus(String username, StatusRequest req){
-    HttpURLConnection connection = null;
+    public boolean changeUserStatus(String username, StatusRequest req) {
+        HttpURLConnection connection = null;
 
         try {
             URL url = new URL(prop.getUsersURL() + "/" + username);

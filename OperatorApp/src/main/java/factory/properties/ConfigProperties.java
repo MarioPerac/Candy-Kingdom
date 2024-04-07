@@ -38,4 +38,8 @@ public class ConfigProperties {
 
         return properties.getProperty("products_url");
     }
+
+    public String getLogFilePath() {
+        return properties.getProperty("log_file");
+    }
 }

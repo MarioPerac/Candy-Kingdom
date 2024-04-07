@@ -1,5 +1,6 @@
 package factory.service;
 
+import factory.logger.AppLogger;
 import factory.properties.ConfigProperties;
 
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.util.Properties;
+import java.util.logging.Level;
 
 public class MulticastService {
     private ConfigProperties prop = new ConfigProperties();
@@ -23,7 +25,7 @@ public class MulticastService {
             server = new MulticastSocket();
             server.joinGroup(ADDRESS);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
         }
     }
 
@@ -33,7 +35,7 @@ public class MulticastService {
         try {
             server.send(packet);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
         }
     }
 }

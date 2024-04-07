@@ -1,6 +1,7 @@
 package factory.service;
 
 import com.google.gson.Gson;
+import factory.logger.AppLogger;
 import factory.model.Product;
 import factory.properties.ConfigProperties;
 
@@ -12,6 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
 
 public class ProductService {
 
@@ -41,6 +43,7 @@ public class ProductService {
             return new ArrayList<>(Arrays.asList(products));
 
         } catch (IOException e) {
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -64,6 +67,7 @@ public class ProductService {
                 int responseCode = connection.getResponseCode();
             }
         } catch (IOException e) {
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
             throw new RuntimeException("Failed to send request", e);
         } finally {
             if (connection != null)
@@ -89,6 +93,7 @@ public class ProductService {
             int responseCode = connection.getResponseCode();
 
         } catch (IOException e) {
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
             throw new RuntimeException("Failed to send request", e);
         } finally {
             if (connection != null)

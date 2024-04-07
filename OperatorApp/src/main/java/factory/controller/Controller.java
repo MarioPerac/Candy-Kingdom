@@ -1,6 +1,7 @@
 package factory.controller;
 
 import factory.OperatorApplication;
+import factory.logger.AppLogger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -8,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.logging.Level;
 
 public interface Controller {
 
@@ -18,7 +20,7 @@ public interface Controller {
         try {
             scene = new Scene(fxmlLoader.load());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
         }
         stage.setTitle("Candy Kingdom");
         stage.setScene(scene);

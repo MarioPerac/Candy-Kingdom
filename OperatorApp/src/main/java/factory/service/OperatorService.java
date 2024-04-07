@@ -1,5 +1,6 @@
 package factory.service;
 
+import factory.logger.AppLogger;
 import factory.model.Order;
 import factory.model.OrderedProduct;
 import factory.properties.ConfigProperties;
@@ -11,6 +12,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.List;
+import java.util.logging.Level;
 
 public class OperatorService {
 
@@ -44,7 +46,7 @@ public class OperatorService {
             try {
                 success = in.readLine();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
             }
 
             System.out.println(success);
@@ -53,11 +55,13 @@ public class OperatorService {
             } else if ("NOK".equals(success)) {
                 return false;
             } else {
+                AppLogger.getLogger().log(Level.SEVERE, "Authentication failed.");
                 throw new RuntimeException("Authentication failed.");
             }
 
 
         } catch (IOException e) {
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -88,6 +92,7 @@ public class OperatorService {
                 return false;
 
         } catch (IOException e) {
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
             throw new RuntimeException(e);
         }
     }

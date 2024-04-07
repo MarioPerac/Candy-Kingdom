@@ -1,10 +1,12 @@
 package factory.server;
 
+import factory.logger.AppLogger;
 import factory.properties.ConfigMailProperties;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Level;
 
 public class ProxyMailServer {
 
@@ -21,7 +23,7 @@ public class ProxyMailServer {
                 new ProxyMailServerThread(socket).start();
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
         }
 
     }

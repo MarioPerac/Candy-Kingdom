@@ -1,6 +1,7 @@
 package factory.controller;
 
 import factory.FactoryApplication;
+import factory.logger.AppLogger;
 import factory.rmi.DistributorClient;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
+import java.util.logging.Level;
 
 public class MainController {
 
@@ -24,7 +26,7 @@ public class MainController {
         try {
             root = FXMLLoader.load(FactoryApplication.class.getResource("view/message-view.fxml"));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
         }
 
         borderPane.setCenter(root);
@@ -36,7 +38,7 @@ public class MainController {
         try {
             root = FXMLLoader.load(FactoryApplication.class.getResource("view/users-view.fxml"));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
         }
 
         borderPane.setCenter(root);
@@ -51,7 +53,7 @@ public class MainController {
             distributorsController.addDistributors(DistributorClient.getInstance().getDistributors());
 
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
         }
 
         borderPane.setCenter(root);
@@ -64,7 +66,7 @@ public class MainController {
         try {
             root = FXMLLoader.load(FactoryApplication.class.getResource("view/factory_products-view.fxml"));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
         }
 
         borderPane.setCenter(root);

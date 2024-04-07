@@ -1,5 +1,6 @@
 package factory.server;
 
+import factory.logger.AppLogger;
 import factory.properties.ConfigProperties;
 import factory.repository.OperatorRepository;
 
@@ -12,6 +13,7 @@ import java.security.PrivateKey;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Timer;
+import java.util.logging.Level;
 
 public class SecureServerThread extends Thread {
 
@@ -31,7 +33,8 @@ public class SecureServerThread extends Thread {
             out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         } catch (IOException e) {
-            e.printStackTrace();
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
+            
         }
         ORDERS_PATH = prop.getOrdersPath();
     }
@@ -70,7 +73,7 @@ public class SecureServerThread extends Thread {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
             out.println("NOK");
         } finally {
             try {
@@ -78,7 +81,7 @@ public class SecureServerThread extends Thread {
                 out.close();
                 socket.close();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
             }
 
         }

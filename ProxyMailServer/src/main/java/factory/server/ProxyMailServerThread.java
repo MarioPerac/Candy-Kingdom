@@ -1,5 +1,6 @@
 package factory.server;
 
+import factory.logger.AppLogger;
 import factory.model.Mail;
 import factory.model.OrderedProduct;
 import factory.properties.ConfigMailProperties;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.logging.Level;
 
 public class ProxyMailServerThread extends Thread {
 
@@ -26,7 +28,7 @@ public class ProxyMailServerThread extends Thread {
             in = new ObjectInputStream(socket.getInputStream());
             out = new ObjectOutputStream(socket.getOutputStream());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
         }
     }
 
@@ -59,21 +61,21 @@ public class ProxyMailServerThread extends Thread {
                         out.writeObject("OK");
                         out.flush();
                     } catch (MessagingException e) {
-                        e.printStackTrace();
+                        AppLogger.getLogger().log(Level.INFO, e.getMessage());
                         out.writeObject("NOK");
                         out.flush();
                     }
 
 
         } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
         } finally {
             try {
                 in.close();
                 out.close();
                 socket.close();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
             }
 
         }

@@ -1,5 +1,6 @@
 package factory.service;
 
+import factory.logger.AppLogger;
 import factory.model.Mail;
 import factory.model.OrderedProduct;
 import factory.properties.ConfigMailProperties;
@@ -12,6 +13,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.List;
+import java.util.logging.Level;
 
 public class MailService {
     private int PORT;
@@ -26,6 +28,7 @@ public class MailService {
 
     public boolean sendMail(Mail mail) {
 
+        boolean sent = false;
         try (Socket socket = new Socket(InetAddress.getByName(ADDRESS), PORT);
              ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
              ObjectInputStream in = new ObjectInputStream(socket.getInputStream())
@@ -35,14 +38,12 @@ public class MailService {
             out.flush();
 
             String result = (String) in.readObject();
-            if ("OK".equals(result)) {
-                return true;
-            } else
-                return false;
-        } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+            sent = "OK".equals(result);
 
+        } catch (IOException | ClassNotFoundException e) {
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
+        }
+        return sent;
     }
 
 }

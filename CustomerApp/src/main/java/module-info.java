@@ -6,6 +6,7 @@ module Factory {
     requires com.rabbitmq.client;
     requires com.fasterxml.jackson.dataformat.xml;
     requires java.desktop;
+    requires java.logging;
     exports factory.controller;
     exports factory;
     exports factory.model;

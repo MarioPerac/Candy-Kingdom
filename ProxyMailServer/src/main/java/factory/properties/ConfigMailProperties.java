@@ -33,4 +33,8 @@ public class ConfigMailProperties {
         return properties.getProperty("proxy_server_port");
     }
 
+
+    public String getLogFilePath() {
+        return properties.getProperty("log_file");
+    }
 }

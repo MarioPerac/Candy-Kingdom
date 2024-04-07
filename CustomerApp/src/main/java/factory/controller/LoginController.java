@@ -1,5 +1,6 @@
 package factory.controller;
 
+import factory.logger.AppLogger;
 import factory.model.Login;
 import factory.model.Status;
 import factory.model.UserInfo;
@@ -9,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+
+import java.util.logging.Level;
 
 public class LoginController {
 

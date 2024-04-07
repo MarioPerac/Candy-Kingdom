@@ -1,5 +1,6 @@
 package factory.server;
 
+import factory.logger.AppLogger;
 import factory.properties.ConfigProperties;
 
 import javax.net.ssl.SSLServerSocket;
@@ -8,6 +9,7 @@ import javax.net.ssl.SSLSocket;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.SocketException;
+import java.util.logging.Level;
 
 public class SecureServer extends Thread {
 
@@ -49,7 +51,7 @@ public class SecureServer extends Thread {
             }
             System.out.println("Server closed");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
         }
 
     }

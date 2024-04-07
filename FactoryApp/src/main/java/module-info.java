@@ -7,6 +7,7 @@ module factory {
     requires javafx.graphics;
     requires com.google.gson;
     requires java.rmi;
+    requires java.logging;
 
     opens factory.controller to javafx.fxml;
     exports factory.controller;

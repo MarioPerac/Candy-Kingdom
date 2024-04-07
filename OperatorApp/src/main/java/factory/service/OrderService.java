@@ -2,10 +2,12 @@ package factory.service;
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.rabbitmq.client.*;
+import factory.logger.AppLogger;
 import factory.model.Order;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
+import java.util.logging.Level;
 
 
 public class OrderService {
@@ -32,8 +34,7 @@ public class OrderService {
             }
 
         } catch (IOException | TimeoutException e) {
-            e.printStackTrace();
-
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
         }
 
         return null;

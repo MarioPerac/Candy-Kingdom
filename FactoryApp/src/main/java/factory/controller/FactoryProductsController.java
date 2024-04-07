@@ -1,6 +1,7 @@
 package factory.controller;
 
 import factory.FactoryApplication;
+import factory.logger.AppLogger;
 import factory.model.Product;
 import factory.service.ProductService;
 import javafx.collections.FXCollections;
@@ -19,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 
 public class FactoryProductsController implements Initializable {
 
@@ -84,7 +86,7 @@ public class FactoryProductsController implements Initializable {
             products.removeAll();
             products.setAll(productService.getAll());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
         }
     }
 

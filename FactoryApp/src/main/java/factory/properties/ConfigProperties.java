@@ -55,4 +55,8 @@ public class ConfigProperties {
     public String getMulticastAddress() {
         return properties.getProperty("multicast_address");
     }
+
+    public String getLogFilePath() {
+        return properties.getProperty("log_file");
+    }
 }

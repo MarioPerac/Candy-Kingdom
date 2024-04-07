@@ -3,11 +3,13 @@ package factory.service;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
+import factory.logger.AppLogger;
 import factory.model.Order;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
+import java.util.logging.Level;
 
 public class OrderService {
 
@@ -25,7 +27,7 @@ public class OrderService {
             System.out.println(orderXML);
             channel.basicPublish("", QUEUE_NAME, null, orderXML.getBytes(StandardCharsets.UTF_8));
         } catch (IOException | TimeoutException e) {
-            throw new RuntimeException(e);
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
         }
     }
 }
