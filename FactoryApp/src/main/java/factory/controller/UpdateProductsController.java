@@ -2,8 +2,11 @@ package factory.controller;
 
 import factory.model.Product;
 import factory.service.ProductService;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class UpdateProductsController {
     public TextField nameTextField;
@@ -28,6 +31,10 @@ public class UpdateProductsController {
 
         product = new Product(name, price, quantity);
         productService.updateProduct(previousName, product);
+
+        showAlertAndWait(Alert.AlertType.INFORMATION, "Product updated", "Product updated successfully.");
+        Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        stage.close();
     }
 
     public void setName(String name) {
@@ -40,6 +47,14 @@ public class UpdateProductsController {
 
     public void setQuantity(int quantity) {
         quantityTextField.setText(String.valueOf(quantity));
+    }
+
+    private void showAlertAndWait(Alert.AlertType type, String title, String context) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(context);
+        alert.showAndWait();
     }
 
 }

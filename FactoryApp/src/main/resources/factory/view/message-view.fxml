@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="333.0" prefWidth="413.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="factory.controller.MessageController">
+<VBox alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="factory.controller.MessageController">
     <children>
-        <TextArea fx:id="messageTextArea" layoutX="17.0" layoutY="63.0" prefHeight="126.0" prefWidth="373.0"
-                  promptText="Message"/>
-        <Button fx:id="sendButton" layoutX="151.0" layoutY="246.0" mnemonicParsing="false"
-                onMouseClicked="#onSendButtonClick" prefHeight="33.0" prefWidth="106.0" text="Send"/>
-        <Label layoutX="18.0" layoutY="36.0" prefHeight="27.0" prefWidth="118.0" text="Input Message"/>
+        <Label prefHeight="27.0" prefWidth="118.0" text="Input Message">
+            <VBox.margin>
+                <Insets top="20.0"/>
+            </VBox.margin>
+        </Label>
+        <TextArea fx:id="messageTextArea" prefHeight="89.0" prefWidth="374.0" promptText="Message">
+            <VBox.margin>
+                <Insets bottom="20.0" left="20.0" right="20.0"/>
+            </VBox.margin>
+        </TextArea>
+        <Button fx:id="sendButton" mnemonicParsing="false" onMouseClicked="#onSendButtonClick" prefHeight="33.0"
+                prefWidth="106.0" text="Send">
+            <VBox.margin>
+                <Insets bottom="20.0" top="30.0"/>
+            </VBox.margin>
+        </Button>
     </children>
-</AnchorPane>
+</VBox>

@@ -16,6 +16,7 @@ public class FactoryApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Candy Kingdom");
         stage.setScene(scene);
+        stage.setMaximized(true);
         stage.show();
     }
 

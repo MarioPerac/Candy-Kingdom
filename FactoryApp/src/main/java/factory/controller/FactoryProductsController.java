@@ -14,6 +14,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -51,6 +55,7 @@ public class FactoryProductsController implements Initializable {
             private final Button button = new Button("Update");
 
             {
+                button.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, null, null)));
                 button.setOnMouseClicked(event -> {
                     if (!isEmpty()) {
                         Product product = getTableView().getItems().get(getIndex());
@@ -95,6 +100,8 @@ public class FactoryProductsController implements Initializable {
             private Button button = new Button("Delete");
 
             {
+                button.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
+                button.setTextFill(Paint.valueOf("white"));
                 button.setOnMouseClicked(event -> {
                     if (!isEmpty()) {
                         Product product = getTableRow().getItem();
