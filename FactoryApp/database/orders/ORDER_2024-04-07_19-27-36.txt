@@ -1,0 +1,6 @@
+User: mario
+E-mail:peracmario@outlook.com
+Order status: ACCEPTED
+Ordered products:
+name= Snickers, price=1.49$, selectedQuantity=1
+name= Milka čokolada, price=1.99$, selectedQuantity=1

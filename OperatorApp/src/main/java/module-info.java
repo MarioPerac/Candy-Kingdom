@@ -10,6 +10,7 @@ module factory {
     requires jakarta.mail;
     requires com.google.gson;
     opens factory to javafx.fxml;
+    opens factory.model to com.google.gson;
     exports factory;
     exports factory.controller;
     exports factory.model;

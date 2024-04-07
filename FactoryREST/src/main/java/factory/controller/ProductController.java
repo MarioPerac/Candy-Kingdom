@@ -29,6 +29,14 @@ public class ProductController {
         return Response.status(200).build();
     }
 
+    @POST
+    @Path("/list")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addProduct(List<Product> products) {
+        productService.add(products);
+        return Response.status(200).build();
+    }
+
     @DELETE
     @Path("/{name}")
     public Response deleteProduct(@PathParam("name") String name) {

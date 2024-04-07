@@ -1,0 +1,5 @@
+User: mario
+E-mail:peracmario@outlook.com
+Order status: REJECTED
+Ordered products:
+name= M&M's, price=1.99$, selectedQuantity=1

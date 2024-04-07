@@ -26,6 +26,10 @@ public class ProductService {
         productRepository.add(product);
     }
 
+    public void add(List<Product> products) {
+        productRepository.addList(products);
+    }
+
     public boolean delete(String name) {
         return productRepository.delete(name);
     }

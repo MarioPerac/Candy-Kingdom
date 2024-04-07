@@ -1,6 +1,7 @@
 package factory.rmi;
 
 import factory.FactoryApplication;
+import factory.properties.ConfigProperties;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -10,6 +11,7 @@ import java.rmi.registry.Registry;
 public class DistributorClient {
 
     private static DistributorClient instance;
+    private ConfigProperties prop = new ConfigProperties();
 
     @SuppressWarnings("removal")
     private DistributorClient() {
@@ -30,7 +32,7 @@ public class DistributorClient {
     public String[] getDistributors() {
 
         try {
-            Registry registry = LocateRegistry.getRegistry(1099);
+            Registry registry = LocateRegistry.getRegistry(Integer.parseInt(prop.getRegistryPort()));
             return registry.list();
         } catch (RemoteException e) {
             throw new RuntimeException(e);
@@ -40,7 +42,7 @@ public class DistributorClient {
     public DistributorInterface getDistributor(String name) {
         try {
             System.out.println(name);
-            Registry registry = LocateRegistry.getRegistry(1098);
+            Registry registry = LocateRegistry.getRegistry(Integer.parseInt(prop.getRegistryPort()));
             return (DistributorInterface) registry.lookup(name);
         } catch (RemoteException | NotBoundException e) {
             throw new RuntimeException(e);

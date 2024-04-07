@@ -36,10 +36,10 @@ public class Repository {
         for(int i=0; i< products.size(); i++){
             if(products.get(i).getName().equals(name)){
                int newQuantity = products.get(i).getQuantity() - quantity;
-               if(newQuantity == 0)
-                   delete(products.get(i));
-               else
-                   products.get(i).setQuantity(newQuantity);
+               double price = products.get(i).getPrice();
+               delete(products.get(i));
+               if(newQuantity != 0)
+                   products.add(new Product(name, price, quantity));
             }
         }
     }

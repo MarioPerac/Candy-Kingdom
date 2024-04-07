@@ -23,7 +23,13 @@ public class ProductRepository {
     public void addList(List<Product> list) {
         try (Jedis jedis = pool.getResource()) {
             for (Product product : list) {
-                jedis.hmset(instanceName + ":products:map:" + product.getName(), product.toMap());
+                String key = instanceName + ":products:map:" + product.getName();
+                if (!jedis.exists(key))
+                    jedis.hmset(key, product.toMap());
+                else {
+                    int newQuantity = Integer.parseInt(jedis.hget(key, "quantity")) + product.getQuantity();
+                    jedis.hset(key, "quantity", String.valueOf(newQuantity));
+                }
             }
         }
     }

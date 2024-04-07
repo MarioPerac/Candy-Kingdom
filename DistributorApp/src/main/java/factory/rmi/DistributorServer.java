@@ -4,6 +4,7 @@ import factory.DistributorApplication;
 import factory.model.Distributor;
 import factory.model.Product;
 import factory.model.Repository;
+import factory.properties.ConfigProperties;
 import javafx.util.Pair;
 
 import java.rmi.NotBoundException;
@@ -19,6 +20,7 @@ public class DistributorServer extends Thread implements DistributorInterface {
 
 
     private static DistributorServer instance;
+    private ConfigProperties prop = new ConfigProperties();
     private Registry registry;
     @SuppressWarnings("removal")
     private DistributorServer() throws RemoteException{
@@ -42,7 +44,7 @@ public class DistributorServer extends Thread implements DistributorInterface {
             DistributorInterface stub = (DistributorInterface) UnicastRemoteObject.exportObject(server, 0);
 
             try {
-                registry = LocateRegistry.getRegistry(1098);
+                registry = LocateRegistry.getRegistry(Integer.parseInt(prop.getRegistryPort()));
                 registry.rebind(Distributor.getInstance().getName(), stub);
             } catch (RemoteException e) {
                 registry = null;
@@ -50,7 +52,7 @@ public class DistributorServer extends Thread implements DistributorInterface {
 
             if (registry == null) {
                 try {
-                    registry = LocateRegistry.createRegistry(1098);
+                    registry = LocateRegistry.createRegistry(Integer.parseInt(prop.getRegistryPort()));
                     registry.rebind(Distributor.getInstance().getName(), stub);
                 } catch (RemoteException e) {
                     e.printStackTrace();

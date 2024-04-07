@@ -59,4 +59,8 @@ public class ConfigProperties {
     public String getLogFilePath() {
         return properties.getProperty("log_file");
     }
+
+    public String getRegistryPort() {
+        return properties.getProperty("registry_port");
+    }
 }

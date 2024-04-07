@@ -42,4 +42,16 @@ public class ConfigProperties {
     public String getLogFilePath() {
         return properties.getProperty("log_file");
     }
+
+    public String getMQHost() {
+        return properties.getProperty("mq_host");
+    }
+
+    public String getMQUsername() {
+        return properties.getProperty("mq_username");
+    }
+
+    public String getMQPassword() {
+        return properties.getProperty("mq_password");
+    }
 }

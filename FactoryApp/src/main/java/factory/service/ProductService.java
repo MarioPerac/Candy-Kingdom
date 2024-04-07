@@ -48,6 +48,32 @@ public class ProductService {
         }
     }
 
+    public void addProducts(List<Product> products) {
+        HttpURLConnection connection = null;
+        try {
+            URL url = new URL(prop.getProductsURL() + "/list");
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setDoOutput(true);
+
+            try (OutputStream outputStream = connection.getOutputStream();
+                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream))) {
+
+                writer.write(gson.toJson(products));
+                writer.flush();
+
+                int responseCode = connection.getResponseCode();
+            }
+        } catch (IOException e) {
+            AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
+            throw new RuntimeException("Failed to send request", e);
+        } finally {
+            if (connection != null)
+                connection.disconnect();
+        }
+    }
+
     public void updateProduct(String name, Product product) {
         HttpURLConnection connection = null;
         try {

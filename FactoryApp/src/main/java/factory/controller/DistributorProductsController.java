@@ -3,12 +3,15 @@ package factory.controller;
 import factory.model.DistributorProduct;
 import factory.model.Product;
 import factory.rmi.DistributorInterface;
+import factory.service.ProductService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.rmi.RemoteException;
@@ -25,6 +28,8 @@ public class DistributorProductsController implements Initializable {
     private ObservableList<DistributorProduct> products;
 
     private DistributorInterface distributor;
+
+    private ProductService productService = new ProductService();
 
     public DistributorInterface getDistributor() {
         return distributor;
@@ -54,23 +59,25 @@ public class DistributorProductsController implements Initializable {
     public void onBuyButtonClick(MouseEvent mouseEvent) {
 
         HashMap<String, Integer> boughtProducts = new HashMap<>();
-        HashMap<String, Double> boughtProductsPrice = new HashMap<>();
+        List<Product> newProducts = new ArrayList<>();
         for (DistributorProduct p : products) {
             if (p.getSelectedQuantity() > 0) {
                 boughtProducts.put(p.getName(), p.getSelectedQuantity());
-                boughtProductsPrice.put(p.getName(), p.getPrice());
+                newProducts.add(new Product(p.getName(), p.getPrice(), p.getSelectedQuantity()));
             }
         }
 
         if (!boughtProducts.isEmpty()) {
             try {
                 distributor.buyProduct(boughtProducts);
-                //to do, save products, change to distributors view
+                productService.addProducts(newProducts);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
 
             showAlertAndWait(Alert.AlertType.CONFIRMATION, "Buying confirmation", "Products bought successfully.");
+            Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+            stage.close();
         } else {
             showAlertAndWait(Alert.AlertType.ERROR, "Buying error", "No selected products.");
         }
