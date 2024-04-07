@@ -1,18 +1,18 @@
-package factory.distributorapp.rmi;
+package factory.rmi;
 
-import factory.distributorapp.DistributorApplication;
-import factory.distributorapp.model.Distributor;
-import factory.distributorapp.model.Product;
-import factory.distributorapp.model.Repository;
+import factory.DistributorApplication;
+import factory.model.Distributor;
+import factory.model.Product;
+import factory.model.Repository;
+import javafx.util.Pair;
 
-
-import java.net.PortUnreachableException;
-import java.rmi.NoSuchObjectException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class DistributorServer extends Thread implements DistributorInterface {
@@ -66,8 +66,20 @@ public class DistributorServer extends Thread implements DistributorInterface {
 
     @Override
     public List<Product> getProducts() throws RemoteException {
-        return Repository.getInstance().getProducts();
+
+        return new ArrayList<>( Repository.getInstance().getProducts());
     }
+
+    @Override
+    public void buyProduct(HashMap<String, Integer> boughtProducts) throws RemoteException {
+
+        Repository repository = Repository.getInstance();
+        for(String key: boughtProducts.keySet()){
+
+            repository.decreaseProductQuantity(key, boughtProducts.get(key));
+        }
+    }
+
 
     public void stopServer() {
         try {

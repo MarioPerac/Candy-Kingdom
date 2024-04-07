@@ -1,7 +1,7 @@
-package factory.distributorapp.controller;
+package factory.controller;
 
-import factory.distributorapp.model.Distributor;
-import factory.distributorapp.rmi.DistributorServer;
+import factory.model.Distributor;
+import factory.rmi.DistributorServer;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 

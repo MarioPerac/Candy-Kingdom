@@ -1,13 +1,9 @@
-package factory.distributorapp.controller;
+package factory.controller;
 
-import factory.distributorapp.DistributorApplication;
-import factory.distributorapp.listener.ProductListener;
-import factory.distributorapp.model.Distributor;
-import factory.distributorapp.model.Product;
-import factory.distributorapp.model.Repository;
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import factory.DistributorApplication;
+import factory.model.Distributor;
+import factory.model.Product;
+import factory.model.Repository;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -23,8 +19,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class ProductsController implements Initializable{
@@ -59,7 +53,6 @@ public class ProductsController implements Initializable{
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(((Node) mouseEvent.getSource()).getScene().getWindow());
             dialogStage.setScene(new Scene(root));
-            AddProductsController addProductsController = fxmlLoader.getController();
             dialogStage.showAndWait();
         } catch (IOException e) {
             throw new RuntimeException(e);

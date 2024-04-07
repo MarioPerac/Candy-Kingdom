@@ -1,6 +1,6 @@
-package factory.distributorapp.controller;
+package factory.controller;
 
-import factory.distributorapp.DistributorApplication;
+import factory.DistributorApplication;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;

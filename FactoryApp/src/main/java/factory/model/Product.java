@@ -1,15 +1,17 @@
 package factory.model;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     private String name;
     private Double price;
 
-    private int quantity;
+    private Integer quantity;
 
     public Product() {
     }
 
-    public Product(String name, Double price, int quantity) {
+    public Product(String name, Double price, Integer quantity) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;

@@ -1,7 +1,9 @@
-package factory.distributorapp.model;
+package factory.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.io.Serializable;
 
 
 public class Repository {
@@ -27,5 +29,18 @@ public class Repository {
 
     public void delete(Product product){
         products.remove(product);
+    }
+
+    public void decreaseProductQuantity(String name, Integer quantity){
+
+        for(int i=0; i< products.size(); i++){
+            if(products.get(i).getName().equals(name)){
+               int newQuantity = products.get(i).getQuantity() - quantity;
+               if(newQuantity == 0)
+                   delete(products.get(i));
+               else
+                   products.get(i).setQuantity(newQuantity);
+            }
+        }
     }
 }

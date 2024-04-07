@@ -1,4 +1,4 @@
-module factory.distributorapp {
+module factory {
     requires javafx.controls;
     requires javafx.fxml;
 
@@ -6,10 +6,9 @@ module factory.distributorapp {
     requires org.kordamp.bootstrapfx.core;
     requires java.rmi;
 
-    opens factory.distributorapp to javafx.fxml;
-    exports factory.distributorapp;
-    exports factory.distributorapp.controller;
-    exports factory.distributorapp.listener;
-    exports factory.distributorapp.model;
-    exports factory.distributorapp.rmi;
+    opens factory to javafx.fxml;
+    exports factory;
+    exports factory.controller;
+    exports factory.model;
+    exports factory.rmi;
 }

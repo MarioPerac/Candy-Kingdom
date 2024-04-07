@@ -1,6 +1,6 @@
-package factory.distributorapp;
+package factory;
 
-import factory.distributorapp.rmi.DistributorServer;
+import factory.rmi.DistributorServer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

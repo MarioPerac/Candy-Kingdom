@@ -11,6 +11,8 @@ module factory {
     opens factory.controller to javafx.fxml;
     exports factory.controller;
     exports factory;
+    exports factory.rmi;
+    exports factory.model;
     opens factory to javafx.fxml;
     opens factory.model to com.google.gson, javafx.base;
 

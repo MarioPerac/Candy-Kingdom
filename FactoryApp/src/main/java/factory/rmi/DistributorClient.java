@@ -39,6 +39,7 @@ public class DistributorClient {
 
     public DistributorInterface getDistributor(String name) {
         try {
+            System.out.println(name);
             Registry registry = LocateRegistry.getRegistry(1099);
             return (DistributorInterface) registry.lookup(name);
         } catch (RemoteException | NotBoundException e) {

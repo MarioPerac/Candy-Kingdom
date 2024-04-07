@@ -48,9 +48,6 @@ public class MainController {
         try {
             root = loader.load();
             DistributorsController distributorsController = loader.getController();
-            for (String s : DistributorClient.getInstance().getDistributors()) {
-                System.out.println(s);
-            }
             distributorsController.addDistributors(DistributorClient.getInstance().getDistributors());
 
         } catch (IOException e) {
@@ -59,5 +56,8 @@ public class MainController {
 
         borderPane.setCenter(root);
 
+    }
+
+    public void onProductsButtonClick(MouseEvent mouseEvent) {
     }
 }

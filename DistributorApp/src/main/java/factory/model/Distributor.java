@@ -1,4 +1,4 @@
-package factory.distributorapp.model;
+package factory.model;
 
 public class Distributor {
 

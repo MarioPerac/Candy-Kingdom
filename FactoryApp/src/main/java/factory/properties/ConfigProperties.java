@@ -20,6 +20,10 @@ public class ConfigProperties {
         return properties.getProperty("users_url");
     }
 
+    public String getProductsURL() {
+        return properties.getProperty("products_url");
+    }
+
     public String getKeyStorePath() {
         return properties.getProperty("keystore_path");
     }
