@@ -7,6 +7,7 @@ import factory.model.OrderedProduct;
 import factory.service.MailService;
 import factory.service.OperatorService;
 import factory.service.OrderService;
+import factory.service.ProductService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -33,6 +34,7 @@ public class OrderController implements Initializable {
     public static Order order;
     private MailService mailService = new MailService();
     private OperatorService operatorService = new OperatorService();
+    private ProductService productService = new ProductService();
 
     public void onAcceptButtonClick(MouseEvent mouseEvent) {
         boolean result = mailService.sendMail(new Mail(order.getCustomerEmail(), order.getCustomerUsername(), OrderStatus.ACCEPTED.toString(), order.getProducts()));
@@ -62,6 +64,7 @@ public class OrderController implements Initializable {
             alert.setTitle("Mail sent");
             alert.setHeaderText(null);
             alert.setContentText("Mail sent successfully!");
+            productService.increaseProductsQuantity(order.getProducts());
             operatorService.saveOrder(order, OrderStatus.REJECTED.toString());
         } else {
             alert = new Alert(Alert.AlertType.ERROR);

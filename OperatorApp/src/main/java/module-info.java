@@ -8,6 +8,7 @@ module factory {
     requires com.fasterxml.jackson.dataformat.xml;
 
     requires jakarta.mail;
+    requires com.google.gson;
     opens factory to javafx.fxml;
     exports factory;
     exports factory.controller;

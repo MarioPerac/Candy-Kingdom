@@ -24,8 +24,16 @@ public class ProductController {
     @PUT
     @Path("/decrease")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateProducts(List<OrderedProduct> orderedProducts) {
+    public Response decreaseProductsQuantity(List<OrderedProduct> orderedProducts) {
         productService.decreaseProductQuantity(orderedProducts);
+        return Response.status(200).build();
+    }
+
+    @PUT
+    @Path("/increase")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response increaseProductsQuantity(List<OrderedProduct> orderedProducts) {
+        productService.increaseProductQuantity(orderedProducts);
         return Response.status(200).build();
     }
 }

@@ -54,4 +54,15 @@ public class ProductRepository {
 
         }
     }
+
+    public void increaseProductQuantity(List<OrderedProduct> orderedProducts) {
+        for (OrderedProduct op : orderedProducts) {
+            try (Jedis jedis = pool.getResource()) {
+                int quantity = Integer.parseInt(jedis.hget(instanceName + ":products:map:" + op.getName(), "quantity"));
+                int newQuantity = quantity + op.getSelectedQuantity();
+                jedis.hset(instanceName + ":products:map:" + op.getName(), "quantity", String.valueOf(newQuantity));
+            }
+
+        }
+    }
 }

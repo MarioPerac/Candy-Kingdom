@@ -18,4 +18,7 @@ public class ProductService {
     }
 
 
+    public void increaseProductQuantity(List<OrderedProduct> orderedProducts) {
+        productRepository.increaseProductQuantity(orderedProducts);
+    }
 }
