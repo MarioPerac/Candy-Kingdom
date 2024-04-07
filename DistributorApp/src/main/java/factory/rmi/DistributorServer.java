@@ -42,7 +42,7 @@ public class DistributorServer extends Thread implements DistributorInterface {
             DistributorInterface stub = (DistributorInterface) UnicastRemoteObject.exportObject(server, 0);
 
             try {
-                registry = LocateRegistry.getRegistry(1099);
+                registry = LocateRegistry.getRegistry(1098);
                 registry.rebind(Distributor.getInstance().getName(), stub);
             } catch (RemoteException e) {
                 registry = null;
@@ -50,7 +50,7 @@ public class DistributorServer extends Thread implements DistributorInterface {
 
             if (registry == null) {
                 try {
-                    registry = LocateRegistry.createRegistry(1099);
+                    registry = LocateRegistry.createRegistry(1098);
                     registry.rebind(Distributor.getInstance().getName(), stub);
                 } catch (RemoteException e) {
                     e.printStackTrace();

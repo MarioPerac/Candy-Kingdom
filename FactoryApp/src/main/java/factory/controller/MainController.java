@@ -59,5 +59,14 @@ public class MainController {
     }
 
     public void onProductsButtonClick(MouseEvent mouseEvent) {
+        Parent root = null;
+
+        try {
+            root = FXMLLoader.load(FactoryApplication.class.getResource("view/factory_products-view.fxml"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        borderPane.setCenter(root);
     }
 }

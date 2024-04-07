@@ -7,6 +7,8 @@ import factory.properties.ConfigProperties;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,5 +45,55 @@ public class ProductService {
         }
     }
 
-   
+    public void updateProduct(String name, Product product) {
+        HttpURLConnection connection = null;
+        try {
+            String encodedName = URLEncoder.encode(name, "UTF-8");
+            URL url = new URL(prop.getProductsURL() + "/" + encodedName);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("PUT");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setDoOutput(true);
+
+            try (OutputStream outputStream = connection.getOutputStream();
+                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream))) {
+
+                writer.write(gson.toJson(product));
+                writer.flush();
+
+                int responseCode = connection.getResponseCode();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to send request", e);
+        } finally {
+            if (connection != null)
+                connection.disconnect();
+        }
+    }
+
+
+    public void deleteProduct(String name) {
+        HttpURLConnection connection = null;
+        try {
+            String encodedName = URLEncoder.encode(name, "UTF-8");
+            System.out.println(prop.getProductsURL() + "/" + encodedName);
+            URL url = new URL(prop.getProductsURL() + "/" + encodedName);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("DELETE");
+            connection.setDoOutput(true);
+
+            try (OutputStream out = connection.getOutputStream()) {
+                out.write("".getBytes(StandardCharsets.UTF_8));
+                out.flush();
+            }
+            int responseCode = connection.getResponseCode();
+
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to send request", e);
+        } finally {
+            if (connection != null)
+                connection.disconnect();
+        }
+    }
+
 }

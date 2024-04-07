@@ -7,7 +7,8 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-import javax.print.attribute.standard.Media;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 @Path("/products")
@@ -19,6 +20,42 @@ public class ProductController {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Product> getAllAvailable() {
         return productService.getAllAvailable();
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addProduct(Product product) {
+        productService.add(product);
+        return Response.status(200).build();
+    }
+
+    @DELETE
+    @Path("/{name}")
+    public Response deleteProduct(@PathParam("name") String name) {
+        String decodedName = null;
+        try {
+            decodedName = URLDecoder.decode(name, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+        if (productService.delete(decodedName))
+            return Response.status(204).build();
+        else
+            return Response.status(404).build();
+    }
+
+    @PUT
+    @Path("/{name}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response update(@PathParam("name") String name, Product product) {
+        String decodedName = null;
+        try {
+            decodedName = URLDecoder.decode(name, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+        productService.update(decodedName, product);
+        return Response.status(200).build();
     }
 
     @PUT

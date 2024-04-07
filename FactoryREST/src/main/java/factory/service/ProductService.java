@@ -21,4 +21,16 @@ public class ProductService {
     public void increaseProductQuantity(List<OrderedProduct> orderedProducts) {
         productRepository.increaseProductQuantity(orderedProducts);
     }
+
+    public void add(Product product) {
+        productRepository.add(product);
+    }
+
+    public boolean delete(String name) {
+        return productRepository.delete(name);
+    }
+
+    public void update(String name, Product product) {
+        productRepository.update(name, product);
+    }
 }

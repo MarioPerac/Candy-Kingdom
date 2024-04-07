@@ -28,6 +28,13 @@ public class ProductRepository {
         }
     }
 
+    public boolean delete(String name) {
+        try (Jedis jedis = pool.getResource()) {
+            long result = jedis.del(instanceName + ":products:map:" + name);
+            return result == 1;
+        }
+    }
+
     public List<Product> getAllAvailable() {
         try (Jedis jedis = pool.getResource()) {
             List<Product> products = new ArrayList<>();
@@ -63,6 +70,17 @@ public class ProductRepository {
                 jedis.hset(instanceName + ":products:map:" + op.getName(), "quantity", String.valueOf(newQuantity));
             }
 
+        }
+    }
+
+    public void update(String name, Product product) {
+        try (Jedis jedis = pool.getResource()) {
+            if (name.equals(product.getName())) {
+                jedis.hmset(instanceName + ":products:map:" + name, product.toMap());
+            } else {
+                delete(name);
+                add(product);
+            }
         }
     }
 }
