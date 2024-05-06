@@ -2,14 +2,23 @@ package factory;
 
 import factory.service.MulticastService;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
 public class CustomerApplication extends Application {
 
+    private static MulticastService multicastService;
+
+
+    public static void closeCustomerService() {
+        if (multicastService != null)
+            multicastService.stopService();
+    }
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -21,9 +30,10 @@ public class CustomerApplication extends Application {
     }
 
     public static void main(String[] args) {
-        MulticastService multicastService = new MulticastService();
+        multicastService = new MulticastService();
         multicastService.start();
         launch();
         multicastService.stopService();
+
     }
 }

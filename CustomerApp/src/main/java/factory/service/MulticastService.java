@@ -45,7 +45,8 @@ public class MulticastService extends Thread {
             try {
                 client.receive(packet);
             } catch (IOException e) {
-                AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
+                if (!client.isClosed())
+                    AppLogger.getLogger().log(Level.SEVERE, e.getMessage());
             }
 
             String message = new String(packet.getData(), 0, packet.getLength());
@@ -64,5 +65,6 @@ public class MulticastService extends Thread {
 
     public void stopService() {
         END = true;
+        client.close();
     }
 }
