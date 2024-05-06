@@ -39,7 +39,7 @@ public class Repository {
                double price = products.get(i).getPrice();
                delete(products.get(i));
                if(newQuantity != 0)
-                   products.add(new Product(name, price, quantity));
+                   products.add(new Product(name, price, newQuantity));
             }
         }
     }

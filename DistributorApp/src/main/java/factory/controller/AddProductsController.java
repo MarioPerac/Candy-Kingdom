@@ -3,7 +3,7 @@ package factory.controller;
 import factory.model.Product;
 import factory.model.Repository;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;e
+import javafx.scene.input.MouseEvent;
 
 public class AddProductsController {
     public TextField quantityTextField;
