@@ -1,0 +1,5 @@
+User: mario
+E-mail:peracmario@outlook.com
+Order status: ACCEPTED
+Ordered products:
+name= Twix, price=1.79$, selectedQuantity=1
